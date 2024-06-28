@@ -39,22 +39,20 @@ import org.eclipse.jgit.transport.URIish;
 public class GitScmAdapter implements ScmAdapter {
     private static final Logger logger = Logger.getLogger(GitScmAdapter.class.getName());
 
-    private final GitSCM gitScm;
-    private final Run<?, ?> build;
+    private final BuildData buildData;
+    private final List<RemoteConfig> repoList;
 
     public GitScmAdapter(GitSCM scm, Run<?, ?> build) {
-        this.gitScm = scm;
-        this.build = build;
+        this.repoList = scm.getRepositories();
+        this.buildData = build.getAction(BuildData.class);
     }
 
     public Map<String, URIish> getCommitRepoMap() throws Exception {
-        List<RemoteConfig> repoList = this.gitScm.getRepositories();
         if (repoList.size() < 1) {
             throw new Exception("No repos found");
         }
 
         HashMap<String, URIish> commitRepoMap = new HashMap<String, URIish>();
-        BuildData buildData = build.getAction(BuildData.class);
         if (buildData == null || buildData.getLastBuiltRevision() == null) {
             logger.warning("Build data could not be found");
         } else {
