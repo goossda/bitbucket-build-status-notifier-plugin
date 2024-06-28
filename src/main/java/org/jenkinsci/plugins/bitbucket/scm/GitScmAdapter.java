@@ -27,6 +27,7 @@ package org.jenkinsci.plugins.bitbucket.scm;
 import hudson.model.Run;
 import hudson.plugins.git.GitSCM;
 import hudson.plugins.git.util.BuildData;
+import hudson.plugins.git.Revision;
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,10 +54,32 @@ public class GitScmAdapter implements ScmAdapter {
         }
 
         HashMap<String, URIish> commitRepoMap = new HashMap<String, URIish>();
-        if (buildData == null || buildData.getLastBuiltRevision() == null) {
+        if (buildData == null) {
             logger.warning("Build data could not be found");
+
+            return commitRepoMap;
+        }
+
+        Revision lastBuiltRevision = buildData.getLastBuiltRevision();
+        if (lastBuiltRevision == null) {
+            logger.warning("Last build revision could not be found");
+
+            return commitRepoMap;
+        }
+
+        RemoteConfig remoteConfig = repoList.get(0);
+        if (remoteConfig == null || remoteConfig.getURIs().isEmpty()) {
+            logger.warning("No URIs found in the remote config");
+
+            return commitRepoMap;
+        }
+
+        URIish uri = remoteConfig.getURIs().get(0);
+        String sha1String = lastBuiltRevision.getSha1String();
+        if (uri != null && sha1String != null) {
+            commitRepoMap.put(sha1String, uri);
         } else {
-            commitRepoMap.put(buildData.getLastBuiltRevision().getSha1String(), repoList.get(0).getURIs().get(0));
+            logger.warning("URI or SHA1 string is null");
         }
 
         return commitRepoMap;
