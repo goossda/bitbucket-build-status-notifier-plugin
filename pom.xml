@@ -19,7 +19,7 @@
     <workflow.version>2.80</workflow.version>
     <!-- Baseline Jenkins version you use to build and test the plugin. Users must have this version or newer to run. -->
     <jenkins.version>2.387.3</jenkins.version>
-    <java.version>8</java.version>
+    <java.version>11</java.version>
   </properties>
 
   <name>Bitbucket Build Status Notifier Plugin</name>
