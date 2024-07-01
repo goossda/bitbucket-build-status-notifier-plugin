@@ -1,4 +1,5 @@
 buildPlugin(
+  jdkVersions: [11, 17],
   useContainerAgent: true,
   configurations: [
     [platform: 'linux', jdk: 17],
