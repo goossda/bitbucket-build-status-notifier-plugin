@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>4.80</version>
+    <version>4.83</version>
     <relativePath />
   </parent>
 
@@ -41,9 +41,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/bitbucket-build-status-notifier-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/bitbucket-build-status-notifier-plugin.git</developerConnection>
-    <url>http://github.com/jenkinsci/bitbucket-build-status-notifier-plugin</url>
+    <connection>scm:git:https://github.com/jenkinsci/bitbucket-build-status-notifier-plugin.git</connection>
+    <developerConnection>scm:git:https://github.com:jenkinsci/bitbucket-build-status-notifier-plugin.git</developerConnection>
+    <url>https://github.com/jenkinsci/bitbucket-build-status-notifier-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -135,10 +135,7 @@
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
         <extensions>true</extensions>
-        <version>3.53</version>
-        <configuration>
-          <minimumJavaVersion>11</minimumJavaVersion>
-        </configuration>
+        <version>3.55</version>
         <executions>
           <execution>
             <goals>
